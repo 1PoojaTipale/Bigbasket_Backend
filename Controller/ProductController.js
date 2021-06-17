@@ -44,7 +44,7 @@ exports.getAllproduct =
     Product.find().exec((err, product) => {
       if (err) {
         return res.status(400).json({
-          error: "NO categories found"
+          error: "NO Products found"
         });
       }
       res.json(product);
@@ -52,26 +52,26 @@ exports.getAllproduct =
   };
 
 
-// exports.getProductById = (req, res, next, id) => {
-//   Product.findById(id)
-//     .populate("category")
-//     .exec((err, product) => {
-//       if (err) {
-//         return res.status(400).json({
-//           error: "Product not found"
-//         });
-//       }
-//       req.product = product;
-//       next();
-//     });
-// };
+exports.getProductById = (req, res, next, id) => {
+  Product.findById(id)
+    .populate("category")
+    .exec((err, product) => {
+      if (err) {
+        return res.status(400).json({
+          error: "Product not found"
+        });
+      }
+      req.product = product;
+      next();
+    });
+};
 
 
-// exports.getProduct = (req, res) => {
-//     req.product.photo = undefined;
-//     return res.json(req.product);
-//   };
-// // delete controllers
+exports.getProduct = (req, res) => {
+    req.product.photo = undefined;
+    return res.json(req.product);
+  };
+// delete controllers
 // exports.deleteProduct = (req, res) => {
 //   let product = req.product;
 //   product.remove((err, deletedProduct) => {
