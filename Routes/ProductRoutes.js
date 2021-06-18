@@ -7,8 +7,8 @@ const {
   getAllproduct,
   getProduct,
 //   photo,
-//   updateProduct,
-//   deleteProduct,
+  // updateProduct,
+  deleteProduct,
 //   getAllProducts,
 //   getAllUniqueCategories
 } = require("../controller/productController");
@@ -19,11 +19,14 @@ const {
 router.param("productId", getProductById);
 router.get("/product/:productId", getProduct);
 
+const {getProductbyId} = require("../Controller/ProductController");
+const {removeProduct} = require("../Controller/ProductController");
+
 //all of actual routes
 //create route
 router.post("/product/create",createProduct);
 router.get("/product",getAllproduct);
-
+router.delete("/product/:productId",removeProduct);
 // router.get("/product",getAllproduct);
 
 // // read routes

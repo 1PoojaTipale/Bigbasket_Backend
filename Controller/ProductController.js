@@ -71,6 +71,52 @@ exports.getProduct = (req, res) => {
     req.product.photo = undefined;
     return res.json(req.product);
   };
+
+
+
+  exports.removeProduct = (req, res) => {
+    const product = req.product;
+  
+   product.remove((err, product) => {
+      if (err) {
+        return res.status(400).json({
+          error: "Failed to delete this Product"
+        });
+      }
+      res.json({
+        message: "Successfull deleted product"
+      });
+    });
+  };
+
+
+  exports.getProductbyId = (req, res, next, id) => {
+    Product.findById(id)
+      // .populate("category")
+      .exec((err, product) => {
+        if (err) {
+          return res.status(400).json({
+            error: "product not found"
+          });
+        }
+        req.product = product;
+        next();
+      });
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // delete controllers
 // exports.deleteProduct = (req, res) => {
 //   let product = req.product;
